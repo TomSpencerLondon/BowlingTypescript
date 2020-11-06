@@ -1,7 +1,5 @@
 export const game = (input: string): number => {
-  let result = 0;
-  if (input.charAt(0) !== "-") {
-    result = 5;
-  }
+  const result = parseInt(input.charAt(0)) || 0;
+
   return result;
 };
