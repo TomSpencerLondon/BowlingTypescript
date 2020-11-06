@@ -1,7 +1,10 @@
 import { game } from "../src/bowling";
 
 describe("Bowling", () => {
-  it("returns 0 for gutter game", () => {
-    expect(game("--|--|--|--|--|--|--|--|--|--||")).toEqual(0);
-  });
+  it.each([["--|--|--|--|--|--|--|--|--|--||", 0]])(
+    "returns 0 for gutter game",
+    (input: string, output: number) => {
+      expect(game(input)).toEqual(output);
+    }
+  );
 });
