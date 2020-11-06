@@ -1,7 +1,12 @@
 export const game = (input: string): number => {
+  const filtered = input.replace("|", "");
   let result = 0;
   for (let i = 0; i < 30; i++) {
-    result += parseInt(input.charAt(i)) || 0;
+    if (input.charAt(i) == "/") {
+      result += 10 - parseInt(filtered.charAt(i - 1));
+      result += parseInt(filtered.charAt(i + 1));
+    }
+    result += parseInt(filtered.charAt(i)) || 0;
   }
 
   return result;
