@@ -1,5 +1,8 @@
 export const game = (input: string): number => {
-  const result = parseInt(input.charAt(0)) || 0;
+  let result = 0;
+  for (let i = 0; i < 30; i++) {
+    result += parseInt(input.charAt(i)) || 0;
+  }
 
   return result;
 };
