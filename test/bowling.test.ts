@@ -1,4 +1,4 @@
-import { game } from "../src/bowling";
+import { play } from "../src/bowling";
 
 describe("Bowling", () => {
   it.each([
@@ -8,7 +8,11 @@ describe("Bowling", () => {
     ["34|4-|--|--|--|--|--|--|--|--||", 11],
     ["3/|4-|--|--|--|--|--|--|--|--||", 18],
     ["X|43|--|--|--|--|--|--|--|--||", 24],
+    ["--|--|--|--|--|--|--|--|--|X||21", 16],
+    ["X|7/|9-|X|-8|8/|-6|X|X|X||81", 167],
+    ["X|X|X|--|--|--|--|--|--|--||", 60],
+    ["9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", 90],
   ])("returns correct output for input", (input: string, output: number) => {
-    expect(game(input)).toEqual(output);
+    expect(play(input)).toEqual(output);
   });
 });

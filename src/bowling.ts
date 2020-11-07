@@ -1,19 +1,20 @@
-export const game = (input: string): number => {
-  const filtered = input.replace("|", "");
+export const play = (input: string): number => {
+  const chars = input.replace(/[\\|]/g, "");
   let result = 0;
-  for (let i = 0; i < filtered.length; i++) {
-    if (input.charAt(i) === "/") {
-      result += 10 - parseInt(filtered.charAt(i - 1));
-      result += parseInt(filtered.charAt(i + 1));
+  for (let i = 0; i < chars.length; i++) {
+    if (chars[i] === "-") {
+      result += roll(0);
+    } else if (chars[i] === "/") {
+      result += roll(10 - parseInt(chars[i - 1].toString()));
+    } else if (chars[i] === "X") {
+      result += roll(10);
+    } else {
+      result += roll(parseInt(chars[i].toString()));
     }
-    if (input.charAt(i) === "X") {
-      result +=
-        10 +
-        parseInt(filtered.charAt(i + 1)) +
-        parseInt(filtered.charAt(i + 2));
-    }
-    result += parseInt(filtered.charAt(i)) || 0;
   }
-
   return result;
+};
+
+const roll = (number: number): number => {
+  return 0;
 };
