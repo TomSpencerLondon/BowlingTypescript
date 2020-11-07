@@ -1,6 +1,9 @@
-import { play } from "../src/bowling";
+import { clearGame, play, result, rollGame } from "../src/bowling";
 
 describe("Bowling", () => {
+  beforeEach(() => {
+    clearGame();
+  });
   it.each([
     ["--|--|--|--|--|--|--|--|--|--||", 0],
     ["5-|--|--|--|--|--|--|--|--|--||", 5],
@@ -13,6 +16,12 @@ describe("Bowling", () => {
     ["X|X|X|--|--|--|--|--|--|--||", 60],
     ["9-|9-|9-|9-|9-|9-|9-|9-|9-|9-||", 90],
   ])("returns correct output for input", (input: string, output: number) => {
-    expect(play(input)).toEqual(output);
+    play(input);
+    expect(result()).toEqual(output);
+  });
+
+  it("can score a gutter game", () => {
+    rollGame([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    expect(result());
   });
 });
