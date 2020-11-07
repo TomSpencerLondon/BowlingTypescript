@@ -7,6 +7,7 @@ describe("Bowling", () => {
     ["9-|--|--|--|--|--|--|--|--|--||", 9],
     ["34|4-|--|--|--|--|--|--|--|--||", 11],
     ["3/|4-|--|--|--|--|--|--|--|--||", 18],
+    ["X|43|--|--|--|--|--|--|--|--||", 24],
   ])("returns correct output for input", (input: string, output: number) => {
     expect(game(input)).toEqual(output);
   });
