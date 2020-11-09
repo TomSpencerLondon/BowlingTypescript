@@ -19,14 +19,21 @@ export const play = (input: string): void => {
 export const bowl = (roll: number): void => {
   rolls[latest++] = roll;
 };
+
+function isStrike(currentPosition: number) {
+  return rolls[currentPosition] === 10;
+}
+
 export const result = (): number => {
   let currentPosition = 0;
   let score = 0;
 
   for (let frame = 0; frame < 10; frame++) {
-    if (isSpare(currentPosition)) {
-      score += rolls[currentPosition] + rolls[currentPosition + 1];
-      score += rolls[currentPosition + 2];
+    if (isStrike(currentPosition)) {
+      score += 10 + rolls[currentPosition + 1] + rolls[currentPosition + 2];
+      currentPosition += 1;
+    } else if (isSpare(currentPosition)) {
+      score += 10 + rolls[currentPosition + 2];
       currentPosition += 2;
     } else {
       score += rolls[currentPosition] + rolls[currentPosition + 1];
