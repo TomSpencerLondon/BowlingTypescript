@@ -1,4 +1,4 @@
-import { clearGame, play, result, rollGame } from "../src/bowling";
+import { bowl, clearGame, play, result } from "../src/bowling";
 
 describe("Bowling", () => {
   beforeEach(() => {
@@ -24,4 +24,10 @@ describe("Bowling", () => {
     rollGame([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     expect(result());
   });
+
+  const rollGame = (rolls: number[]): void => {
+    for (const roll of rolls) {
+      bowl(roll);
+    }
+  };
 });

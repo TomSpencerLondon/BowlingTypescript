@@ -10,29 +10,19 @@ export const play = (input: string): void => {
   const chars = input.replace(/[\\|]/g, "");
   for (let i = 0; i < chars.length; i++) {
     if (chars[i] === "-") {
-      roll(0);
+      bowl(0);
     } else if (chars[i] === "/") {
-      roll(10 - parseInt(chars[i - 1].toString()));
+      bowl(10 - parseInt(chars[i - 1].toString()));
     } else if (chars[i] === "X") {
-      roll(10);
+      bowl(10);
     } else {
-      roll(parseInt(chars[i].toString()));
+      bowl(parseInt(chars[i].toString()));
     }
   }
 };
 
-const roll = (toppled: number): void => {
-  rolls[latest++] = toppled;
-};
-
-export const rollGame = (throws: number[]): void => {
-  for (const toppled of rolls) {
-    drop(toppled);
-  }
-};
-
-export const drop = (dropped: number): void => {
-  rolls[latest++] = dropped;
+export const bowl = (roll: number): void => {
+  rolls[latest++] = roll;
 };
 
 export const result = (): number => {
@@ -49,4 +39,3 @@ export const clearGame = (): void => {
   score = START_SCORE;
   currentPosition = START_POSITION;
 };
-
