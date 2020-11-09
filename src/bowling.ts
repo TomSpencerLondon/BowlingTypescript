@@ -1,7 +1,7 @@
 const START_SCORE = 0;
 const START_POSITION = 0;
 
-const rolls: number[] = Array<number>(21);
+const rolls: number[] = Array<number>();
 let latest = 0;
 let score;
 let currentPosition;
