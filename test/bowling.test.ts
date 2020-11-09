@@ -22,7 +22,7 @@ describe("Bowling", () => {
 
   it("can score a gutter game", () => {
     rollGame([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-    expect(result());
+    expect(result()).toEqual(0);
   });
 
   const rollGame = (rolls: number[]): void => {
