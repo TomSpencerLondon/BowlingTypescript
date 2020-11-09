@@ -4,7 +4,8 @@ describe("Bowling", () => {
   beforeEach(() => {
     clearGame();
   });
-  it.each([
+
+  xit.each([
     ["--|--|--|--|--|--|--|--|--|--||", 0],
     ["5-|--|--|--|--|--|--|--|--|--||", 5],
     ["9-|--|--|--|--|--|--|--|--|--||", 9],
@@ -23,6 +24,21 @@ describe("Bowling", () => {
   it("can score a gutter game", () => {
     rollGame([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
     expect(result()).toEqual(0);
+  });
+
+  it("can score one roll", () => {
+    rollGame([5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    expect(result()).toEqual(5);
+  });
+
+  it("can score some rolls", () => {
+    rollGame([5, 0, 0, 1, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9]);
+    expect(result()).toEqual(5 + 1 + 7 + 9);
+  });
+
+  it("can score a spare", () => {
+    rollGame([3, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+    expect(result()).toEqual(10 + 4 + 4);
   });
 
   const rollGame = (rolls: number[]): void => {

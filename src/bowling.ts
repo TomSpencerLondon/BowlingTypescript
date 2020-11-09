@@ -1,10 +1,5 @@
-const START_SCORE = 0;
-const START_POSITION = 0;
-
 const rolls: number[] = Array<number>();
 let latest = 0;
-let score;
-let currentPosition;
 
 export const play = (input: string): void => {
   const chars = input.replace(/[\\|]/g, "");
@@ -24,18 +19,28 @@ export const play = (input: string): void => {
 export const bowl = (roll: number): void => {
   rolls[latest++] = roll;
 };
-
 export const result = (): number => {
+  let currentPosition = 0;
+  let score = 0;
+
   for (let frame = 0; frame < 10; frame++) {
-    score += rolls[currentPosition] + rolls[currentPosition + 1];
-    currentPosition += 2;
+    if (isSpare(currentPosition)) {
+      score += rolls[currentPosition] + rolls[currentPosition + 1];
+      score += rolls[currentPosition + 2];
+      currentPosition += 2;
+    } else {
+      score += rolls[currentPosition] + rolls[currentPosition + 1];
+      currentPosition += 2;
+    }
   }
 
   return score;
 };
 
+function isSpare(currentPosition: number) {
+  return rolls[currentPosition] + rolls[currentPosition + 1] === 10;
+}
+
 export const clearGame = (): void => {
   latest = 0;
-  score = START_SCORE;
-  currentPosition = START_POSITION;
 };
