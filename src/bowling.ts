@@ -1,38 +1,34 @@
-const rolls: number[] = Array<number>();
-let latest = 0;
-
-export const play = (input: string): void => {
+export const play = (input: string): number => {
+  const rolls: number[] = Array<number>();
   const chars = input.replace(/[\\|]/g, "");
   for (let i = 0; i < chars.length; i++) {
     if (chars[i] === "-") {
-      bowl(0);
+      rolls.push(0);
     } else if (chars[i] === "/") {
-      bowl(10 - parseInt(chars[i - 1].toString()));
+      rolls.push(10 - parseInt(chars[i - 1].toString()));
     } else if (chars[i] === "X") {
-      bowl(10);
+      rolls.push(10);
     } else {
-      bowl(parseInt(chars[i].toString()));
+      rolls.push(parseInt(chars[i].toString()));
     }
   }
+
+  return result(rolls);
 };
 
-export const bowl = (roll: number): void => {
-  rolls[latest++] = roll;
-};
-
-function isStrike(currentPosition: number) {
+function isStrike(currentPosition: number, rolls: number[]) {
   return rolls[currentPosition] === 10;
 }
 
-export const result = (): number => {
+export const result = (rolls: number[]): number => {
   let currentPosition = 0;
   let score = 0;
 
   for (let frame = 0; frame < 10; frame++) {
-    if (isStrike(currentPosition)) {
+    if (isStrike(currentPosition, rolls)) {
       score += 10 + rolls[currentPosition + 1] + rolls[currentPosition + 2];
       currentPosition += 1;
-    } else if (isSpare(currentPosition)) {
+    } else if (isSpare(currentPosition, rolls)) {
       score += 10 + rolls[currentPosition + 2];
       currentPosition += 2;
     } else {
@@ -44,10 +40,6 @@ export const result = (): number => {
   return score;
 };
 
-function isSpare(currentPosition: number) {
+function isSpare(currentPosition: number, rolls: number[]) {
   return rolls[currentPosition] + rolls[currentPosition + 1] === 10;
 }
-
-export const clearGame = (): void => {
-  latest = 0;
-};
